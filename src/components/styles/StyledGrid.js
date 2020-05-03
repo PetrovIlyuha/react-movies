@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledGrid = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
   h1 {
-    font-family: 'Abel', sans-serif;
+    font-family: "Abel", sans-serif;
     font-size: 42px;
 
     @media screen and (max-width: 768px) {
@@ -22,6 +22,10 @@ export const StyledGridContent = styled.div`
 
   .grid-element {
     animation: animateGrid 0.5s;
+  }
+
+  .grid-element:hover {
+    cursor: pointer;
   }
 
   @keyframes animateGrid {
