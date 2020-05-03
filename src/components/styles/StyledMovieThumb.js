@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledMovieThumb = styled.div`
   img {
@@ -11,6 +11,8 @@ export const StyledMovieThumb = styled.div`
 
     :hover {
       opacity: 0.8;
+      transform: translateY(-1px);
+      cursor: pointer;
     }
 
     /* @media screen and (max-width: 1024px) {
