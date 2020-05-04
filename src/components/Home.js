@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
-  API_KEY,
-  API_URL,
   BACKDROP_SIZE,
   IMAGE_BASE_URL,
   POSTER_SIZE,
+  SEARCH_BASE_URL,
+  POPULAR_BASE_URL,
 } from "../config";
 
 // import components
@@ -29,13 +29,20 @@ const Home = () => {
   ] = useHomeFetch();
   const [searchTerm, setSearchTerm] = useState("");
 
+  const searchMovies = (lookupTerm) => {
+    const endpoint = lookupTerm
+      ? SEARCH_BASE_URL + lookupTerm
+      : POPULAR_BASE_URL;
+
+    setSearchTerm(lookupTerm);
+    fetchMovies(endpoint);
+  };
+
   const loadMoreMovies = () => {
-    const searchEndpoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${
-      currentPage + 1
-    } `;
-    const popularEndpoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${
+    const searchEndpoint = `${SEARCH_BASE_URL}${searchTerm}&page=${
       currentPage + 1
     }`;
+    const popularEndpoint = `${POPULAR_BASE_URL}&page=${currentPage + 1}`;
     const endpoint = searchTerm ? searchEndpoint : popularEndpoint;
     fetchMovies(endpoint);
   };
@@ -45,14 +52,15 @@ const Home = () => {
   if (error) return <div>Something went Wrong 😕</div>;
   return (
     <>
-      {heroImage && (
+      {!searchTerm && (
         <HeroImage
           image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${heroImage.backdrop_path}`}
           title={heroImage.title}
           text={heroImage.overview}
         />
       )}
-      <SearchBar />
+
+      <SearchBar callback={searchMovies} />
       <Grid header={searchTerm ? "Search Result" : "Popular Movies"}>
         {movies.map((movie) => (
           <MovieThumb
