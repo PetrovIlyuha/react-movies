@@ -6,16 +6,29 @@ import MovieInfoBar from "./elements/SingleMoviePage/MovieInfoBar";
 import Grid from "./elements/Grid";
 import Spinner from "./elements/Spinner";
 
+import { useMovieFetch } from "./hooks/useMovieFetch";
+
 const Movie = ({ movieId }) => {
+  const [movie, loading, error] = useMovieFetch(movieId);
+  const { original_title, runtime, budget, revenue, actors } = movie;
+  if (error) return <div>Something went wrong(</div>;
+  if (loading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+
   return (
     <>
-      <Navigation />
-      <MovieInfo />
-      <MovieInfoBar />
+      <Navigation movie={original_title} />
+      <MovieInfo movie={movie} />
+      <MovieInfoBar time={runtime} budget={budget} revenue={revenue} />
       <Grid>
-        <Actor />
+        {actors.splice(0, 20).map((actor) => (
+          <Actor actor={actor} key={actor.credit_id} />
+        ))}
       </Grid>
-      <Spinner />
     </>
   );
 };
