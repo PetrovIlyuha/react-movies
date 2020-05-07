@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_URL, API_KEY, POPULAR_BASE_URL } from "../../config";
+import { POPULAR_BASE_URL } from "../../config";
 
 export const useHomeFetch = () => {
   const [state, setState] = useState({ movies: [] });
