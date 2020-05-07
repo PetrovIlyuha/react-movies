@@ -49,7 +49,15 @@ const Home = () => {
 
   if (!movies[0]) return <Spinner />;
 
-  if (error) return <div>Something went Wrong 😕</div>;
+  if (error)
+    return (
+      <div>
+        Something went Wrong{" "}
+        <span role="img" aria-label="grumpy face">
+          😕
+        </span>{" "}
+      </div>
+    );
   return (
     <>
       {!searchTerm && (
