@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Actor from "./elements/SingleMoviePage/Actor";
 import Navigation from "./elements/SingleMoviePage/Navigation";
 import MovieInfo from "./elements/SingleMoviePage/MovieInfo";
@@ -31,6 +32,10 @@ const Movie = ({ movieId }) => {
       </Grid>
     </>
   );
+};
+
+Movie.propTypes = {
+  movieId: PropTypes.string,
 };
 
 export default Movie;
