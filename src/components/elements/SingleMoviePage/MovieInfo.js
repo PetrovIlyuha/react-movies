@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import NoImage from "../../images/no_image.jpg";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "../../../config";
@@ -32,7 +33,7 @@ const MovieInfo = ({ movie }) => {
             <div className="director">
               <h3>DIRECTOR {movie.directors.length > 1 ? "S" : ""}</h3>
               {movie.directors.map((director) => (
-                <p key={movie.credit_id}>{director.name}</p>
+                <p key={movie.id}>{director.name}</p>
               ))}
             </div>
           </div>
@@ -40,6 +41,11 @@ const MovieInfo = ({ movie }) => {
       </div>
     </StyledMovieInfo>
   );
+};
+
+MovieInfo.propTypes = {
+  movie: PropTypes.object,
+  directors: PropTypes.array,
 };
 
 export default MovieInfo;
